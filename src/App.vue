@@ -8,22 +8,21 @@ import { reactive } from 'vue';
     resultado: 0
   })
 
-  const soma = () => {
-    return parseFloat(numeroA + numeroB)
+
+ const getResultado = () => {
+  const { operacao } = estado;
+  switch (operacao) {
+    case 'soma':
+      return estado.resultado = (parseFloat(estado.numeroA) + parseFloat(estado.numeroB))
+    case 'subtrair':
+      return estado.resultado = (parseFloat(estado.numeroA) - parseFloat(estado.numeroB))
+    case 'dividir':
+      return estado.resultado = (parseFloat(estado.numeroA)  / parseFloat(estado.numeroBB))
+    case 'multiplicar':
+      return estado.resultado = (parseFloat(estado.numeroA) * parseFloat(estado.numeroB))
   }
 
-  const subtrair = () => {
-    return parseFloat(numeroA - numeroB)
-  }
-
-  const dividir = () => {
-    return parseFloat(numeroA + numeroB)
-  }
-
-  const multiplicar = () => {
-    return parseFloat(numeroA + numeroB)
-  }
-
+ }
 </script>
 
 <template>
@@ -33,7 +32,7 @@ import { reactive } from 'vue';
     <p>Soma, subtração, divisão e multiplicação</p>
   </header>
   <div class="mt-5 mb-5 d-flex justify-content-around">
-    <div class="mb-3" @change="valorNovo">
+    <div class="mb-3">
       <input @change="evento => estado.numeroA = evento.target.value" type="number" placeholder="Digite aqui o numero">
     </div>
     <div>
@@ -50,7 +49,7 @@ import { reactive } from 'vue';
   </div>
   <div class="col-md-12">
     <p @change="evento => estado.resultado = evento.target.value" class="fw-bold fs-6 text-center mt-5">
-      O Resultado é {{ estado.resultado }}
+      O Resultado é {{ getResultado() }}
     </p>
   </div>
   </div>
